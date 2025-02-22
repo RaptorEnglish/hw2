@@ -18,7 +18,7 @@ std::set<std::string> parseStringToWords(string rawWords)
     std::set<std::string> keywords;
 
     // break rawWords into substrings and break if space or punctuation encountered
-    for (size_t i = 0; i < rawWords.size(); i ++) {
+    for (size_t i = 0; i < rawWords.size(); i++) {
         for (size_t j = i + 2; j < rawWords.size(); j++) {
             std::string substr = rawWords.substr(i, j - i);
             keywords.insert(convToLower(substr));
