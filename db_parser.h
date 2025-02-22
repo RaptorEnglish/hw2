@@ -99,9 +99,9 @@ public:
     virtual void reportItemsRead(std::ostream& os);
 protected:
     User* parseUser(
-        std::istream& is,
-        DataStore& ds,
-        std::string& errorMsg);
+            std::istream& is,
+            DataStore& ds,
+            std::string& errorMsg);
 private:
 
     unsigned int numRead_ ;
