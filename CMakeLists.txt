@@ -3,7 +3,7 @@ project(hw2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(hw2 main.cpp
+add_executable(hw2 amazon.cpp
         product.cpp
         product.h
         db_parser.cpp

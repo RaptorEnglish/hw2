@@ -8,6 +8,29 @@
 #include "util.h"
 
 MyDataStore::~MyDataStore() {
+    for (Product* prod : products) {
+        delete prod;
+    }
+
+    // delete users from map
+    for (std::map<std::string, User*>::iterator it = users.begin(); it != users.end(); it++) {
+        delete it->second;
+    }
+
+//    // delete from keywords
+//    for (std::map<std::string, std::set<Product*>>::iterator it = keyword_map.begin(); it != keyword_map.end(); it++) {
+//        for (std::set<Product*>::iterator it2 = it->second.begin(); it2 != it->second.end(); it2++) {
+//            delete *it2;
+//        }
+//    }
+//
+//    // delete from user carts
+//    for (std::map<std::string, std::deque<Product*>>::iterator it = all_carts.begin(); it != all_carts.end(); it++) {
+//        std::deque<Product*> user_cart = it->second;
+//        for (std::deque<Product*>::iterator it2 = user_cart.begin(); it2 != user_cart.end(); it2++) {
+//            delete *it2;
+//        }
+//    }
 
 }
 
@@ -95,7 +118,7 @@ void MyDataStore::dump(std::ostream &ofile) {
 
 }
 
-void MyDataStore::add_to_cart(std::vector<Product*> hits, std::string username, int hit_result_index) {
+void MyDataStore::add_to_cart(std::vector<Product*> hits, std::string username, size_t hit_result_index) {
     // check that hit size is in bounds
     if (hit_result_index >= hits.size() || hit_result_index < 0) {
         std::cout << "Out of bounds" << std::endl;

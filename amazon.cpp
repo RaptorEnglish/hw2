@@ -136,6 +136,8 @@ int main(int argc, char* argv[])
     }
 
     // free memory
+//    delete productSectionParser;
+//    delete userSectionParser;
 
     return 0;
 }

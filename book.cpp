@@ -14,6 +14,10 @@ Book::Book(const std::string category, const std::string name, double price, int
 
 }
 
+Book::~Book() {
+    // No hay recursos dinámicos que liberar
+}
+
 
 std::set<std::string> Book::keywords() const {
     // extract keywords

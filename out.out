@@ -1,0 +1,23 @@
+<products>
+book
+Data Abstraction & Problem Solving with C++
+79.99
+20
+book
+Great Men and Women of Troy
+19.5
+5
+clothing
+Men's Fitted Shirt
+39.99
+25
+movie
+Hidden Figures DVD
+17.99
+1
+</products>
+<users>
+adal 120 1
+aturing 100 0
+johnvn 50 1
+</users>

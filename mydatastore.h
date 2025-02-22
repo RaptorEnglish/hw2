@@ -13,7 +13,6 @@
 class MyDataStore : public DataStore {
 private:
     std::vector<Product*> products;
-//    std::vector<User*> users;
     std::map<std::string, User*> users;
     std::map<std::string, std::set<Product*>> keyword_map;
 
@@ -31,7 +30,7 @@ public:
 
     void dump(std::ostream& ofile) override;
 
-    void add_to_cart(std::vector<Product*> hits, std::string username, int hit_result_index);
+    void add_to_cart(std::vector<Product*> hits, std::string username, size_t hit_result_index);
 
     void view_cart(std::string username);
 

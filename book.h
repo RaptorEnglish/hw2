@@ -14,8 +14,9 @@ private:
     std::string author;
 public:
     Book(const std::string category, const std::string name, double price, int qty, const std::string isbn_, const std::string author_);
+    ~Book() override; // Destructor
 
-    std::set<std::string> keywords() const;
+    std::set<std::string> keywords() const override;
 
     std::string displayString() const;
 };
