@@ -78,6 +78,20 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
 }
 
 void MyDataStore::dump(std::ostream &ofile) {
+    ofile << "<products>" << std::endl;
+
+    // add all product strings to output file
+    for (size_t i = 0; i < products.size(); i++) {
+        products[i]->dump(ofile);
+    }
+    ofile << "</products>" << std::endl;
+
+    // add all users to output file
+    ofile << "<users>" << std::endl;
+    for (auto it = users.begin(); it != users.end(); it++) {
+        it->second->dump(ofile);
+    }
+    ofile << "</users>";
 
 }
 
