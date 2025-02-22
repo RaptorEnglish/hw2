@@ -1,0 +1,18 @@
+/home/codio/workspace/hw2/hw2_tests/amazon_tests/testFiles/HitMovie/database.txt
+Read 2 products
+Read 1 users
+=====================================
+Menu: 
+  AND term term ...                  
+  OR term term ...                   
+  ADD username search_hit_number     
+  VIEWUSERS                          
+  VIEWCART username                  
+  BUYCART username                   
+  QUIT new_db_filename               
+====================================
+
+Enter command: 
+No results found!
+
+Enter command: 

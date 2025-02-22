@@ -1,0 +1,15 @@
+/home/codio/workspace/hw2/hw2_tests/amazon_tests/testFiles/Quit/database.txt
+Read 4 products
+Read 3 users
+=====================================
+Menu: 
+  AND term term ...                  
+  OR term term ...                   
+  ADD username search_hit_number     
+  VIEWUSERS                          
+  VIEWCART username                  
+  BUYCART username                   
+  QUIT new_db_filename               
+====================================
+
+Enter command: 

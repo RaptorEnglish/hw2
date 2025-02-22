@@ -1,0 +1,30 @@
+/home/codio/workspace/hw2/hw2_tests/amazon_tests/testFiles/AddSameProductTwoUsersCarts/database.txt
+Read 5 products
+Read 3 users
+=====================================
+Menu: 
+  AND term term ...                  
+  OR term term ...                   
+  ADD username search_hit_number     
+  VIEWUSERS                          
+  VIEWCART username                  
+  BUYCART username                   
+  QUIT new_db_filename               
+====================================
+
+Enter command: 
+No results found!
+
+Enter command: 
+Out of bounds
+
+Enter command: 
+Out of bounds
+
+Enter command: 
+Invalid username
+
+Enter command: 
+Invalid username
+
+Enter command: 
