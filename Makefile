@@ -6,6 +6,7 @@ CXXFLAGS=-g -Wall -std=c++11
 OBJS=amazon.o user.o product.o util.o book.o movie.o clothing.o product_parser.o db_parser.o mydatastore.o
 
 all: amazon
+	./amazon database.txt
 
 amazon: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ $(OBJS)

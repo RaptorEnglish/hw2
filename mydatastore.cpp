@@ -5,6 +5,7 @@
 #include "mydatastore.h"
 #include <map>
 #include <deque>
+#include "util.h"
 
 MyDataStore::~MyDataStore() {
 
@@ -43,41 +44,34 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
     }
 
     // store all term matches for futher processing
-    std::vector<std::set<Product*>> term_matches;
+    std::set<Product*> matches;
 
-    // update term matches
+    // add term matches
+    int index = 0;
     for (const std::string& term : terms) {
         auto it = keyword_map.find(term);
         if (it != keyword_map.end()) {
-            term_matches.push_back(keyword_map[term]);
+
+            // initialize matches
+            if (index == 0) {
+                matches = keyword_map[term];
+            } else {
+                if (type == 0) {  // set intersection
+                    matches = setIntersection(matches, keyword_map[term]);
+                } else if (type == 1) {  // set union
+                    matches = setUnion(matches, keyword_map[term]);
+                }
+            }
+
         } else if (type == 0) {
-            // no results if using AND and nothing found
             return results;
         }
+        index++;
     }
 
-    // handle AND search with intersection
-    if (type == 0) {  // intersection set
-        std::set<Product*> intersection_set = term_matches[0];
-
-        // update intersection set
-        for (size_t i = 1; i < term_matches.size(); i++) {
-            std::set<Product *> temp;
-            std::set_intersection(intersection_set.begin(), intersection_set.end(),
-                                  term_matches[i].begin(), term_matches[i].end(),
-                                  std::inserter(temp, temp.begin()));
-            intersection_set = temp;
-        }
-
-        // convert to vector
-        results.assign(intersection_set.begin(), intersection_set.end());
-
-    } else {  // handle OR search with union
-        std::set<Product*> union_set;
-        for (std::set<Product*> match : term_matches) {
-            union_set.insert(match.begin(), match.end());
-        }
-        results.assign(union_set.begin(), union_set.end());
+    // add to set
+    for (Product* prod : matches) {
+        results.push_back(prod);
     }
 
     return results;
