@@ -9,7 +9,6 @@
 #include "db_parser.h"
 #include "util.h"
 
-
 using namespace std;
 
 
@@ -22,8 +21,8 @@ DBParser::DBParser()
 DBParser::~DBParser()
 {
     for(map<string, SectionParser*>::iterator it = parsers_.begin();
-            it != parsers_.end();
-            ++it) {
+        it != parsers_.end();
+        ++it) {
         delete it->second;
     }
 }
@@ -38,6 +37,7 @@ bool DBParser::parse(string db_filename, DataStore& ds)
     cout << "Starting parsing" << endl;
 #endif
     ifstream ifile(db_filename.c_str());
+    std::cout << db_filename << std::endl;
     if(ifile.fail()) {
         return true;
     }
@@ -97,8 +97,8 @@ bool DBParser::parse(string db_filename, DataStore& ds)
     }
     if(!error_) {
         for(map<string, SectionParser*>::iterator it = parsers_.begin();
-                it != parsers_.end();
-                ++it)
+            it != parsers_.end();
+            ++it)
         {
             it->second->reportItemsRead(cout);
         }
@@ -113,8 +113,8 @@ ProductSectionParser::ProductSectionParser()
 ProductSectionParser::~ProductSectionParser()
 {
     for(map<string, ProductParser*>::iterator it = prodParsers_.begin();
-            it != prodParsers_.end();
-            ++it) {
+        it != prodParsers_.end();
+        ++it) {
         delete it->second;
     }
 }
@@ -126,10 +126,10 @@ void ProductSectionParser::addProductParser(ProductParser* p)
 
 
 bool ProductSectionParser::parse(
-    std::istream& is,
-    DataStore& ds,
-    int& lineno,
-    std::string& errorMsg)
+        std::istream& is,
+        DataStore& ds,
+        int& lineno,
+        std::string& errorMsg)
 {
     string line;
     while(getline(is, line)) {
@@ -157,9 +157,9 @@ bool ProductSectionParser::parse(
 
 
 Product* ProductSectionParser::parseProduct(const string& category,
-        istream& is,
-        int& lineno,
-        std::string& errorMsg)
+                                            istream& is,
+                                            int& lineno,
+                                            std::string& errorMsg)
 {
     bool error = false;
     map<string,ProductParser*>::iterator it = prodParsers_.find(category);
@@ -184,10 +184,10 @@ UserSectionParser::UserSectionParser()
     numRead_ = 0;
 }
 bool UserSectionParser::parse(
-    std::istream& is,
-    DataStore& ds,
-    int& lineno,
-    std::string& errorMsg)
+        std::istream& is,
+        DataStore& ds,
+        int& lineno,
+        std::string& errorMsg)
 {
     string line;
     while(getline(is, line)) {
@@ -205,9 +205,9 @@ bool UserSectionParser::parse(
     return false;
 }
 User* UserSectionParser::parseUser(
-    std::istream& is,
-    DataStore& ds,
-    std::string& errorMsg)
+        std::istream& is,
+        DataStore& ds,
+        std::string& errorMsg)
 {
     string username;
     double balance;

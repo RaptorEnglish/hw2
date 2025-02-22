@@ -10,18 +10,21 @@
 #include "product_parser.h"
 #include "util.h"
 
+#include "mydatastore.h"
+
 using namespace std;
+
 struct ProdNameSorter {
     bool operator()(Product* p1, Product* p2) {
         return (p1->getName() < p2->getName());
     }
 };
-void displayProducts(vector<Product*>& hits);
+void displayProducts(std::vector<Product*>& hits);
 
 int main(int argc, char* argv[])
 {
     if(argc < 2) {
-        cerr << "Please specify a database file" << endl;
+        std::cerr << "Please specify a database file" << std::endl;
         return 1;
     }
 
@@ -29,9 +32,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
-
-
+    MyDataStore ds;
 
     // Instantiate the individual section and product parsers we want
     ProductSectionParser* productSectionParser = new ProductSectionParser;
@@ -47,19 +48,23 @@ int main(int argc, char* argv[])
 
     // Now parse the database to populate the DataStore
     if( parser.parse(argv[1], ds) ) {
-        cerr << "Error parsing!" << endl;
+        std::cerr << "Error parsing!" << std::endl;
         return 1;
     }
 
-    cout << "=====================================" << endl;
-    cout << "Menu: " << endl;
-    cout << "  AND term term ...                  " << endl;
-    cout << "  OR term term ...                   " << endl;
-    cout << "  ADD username search_hit_number     " << endl;
-    cout << "  VIEWCART username                  " << endl;
-    cout << "  BUYCART username                   " << endl;
-    cout << "  QUIT new_db_filename               " << endl;
-    cout << "====================================" << endl;
+    // initialize keyword map
+    ds.create_keyword_map();
+
+    std::cout << "=====================================" << std::endl;
+    std::cout << "Menu: " << std::endl;
+    std::cout << "  AND term term ...                  " << std::endl;
+    std::cout << "  OR term term ...                   " << std::endl;
+    std::cout << "  ADD username search_hit_number     " << std::endl;
+    std::cout << "  VIEWUSERS                          " << std::endl;  // new function
+    std::cout << "  VIEWCART username                  " << std::endl;
+    std::cout << "  BUYCART username                   " << std::endl;
+    std::cout << "  QUIT new_db_filename               " << std::endl;
+    std::cout << "====================================" << std::endl;
 
     vector<Product*> hits;
     bool done = false;
@@ -98,18 +103,40 @@ int main(int argc, char* argv[])
                     ofile.close();
                 }
                 done = true;
-            }
-	    /* Add support for other commands here */
+            } else if ( cmd == "VIEWUSERS" ) {
+                ds.print_users();
+            } else if ( cmd == "ADD" ) {
+                std::string username;
+                int hit_result_index;
 
+                // call function to add to cart
+                if (ss >> username >> hit_result_index) {
+                    ds.add_to_cart(hits, convToLower(username), hit_result_index);
+                } else {
+                    std::cout << "Invalid input" << std::endl;
+                }
 
-
-
-            else {
+            } else if ( cmd == "VIEWCART" ) {
+                std::string username;
+                if (ss >> username) {
+                    ds.view_cart(convToLower(username));
+                } else {
+                    std::cout << "Need to specify a user." << std::endl;
+                }
+            } else if ( cmd == "BUYCART" ) {
+                std::string username;
+                if (ss >> username) {
+                    ds.buy_cart(username);
+                }
+            } else {
                 cout << "Unknown command" << endl;
             }
         }
 
     }
+
+    // free memory
+
     return 0;
 }
 
@@ -117,8 +144,8 @@ void displayProducts(vector<Product*>& hits)
 {
     int resultNo = 1;
     if (hits.begin() == hits.end()) {
-    	cout << "No results found!" << endl;
-    	return;
+        cout << "No results found!" << endl;
+        return;
     }
     std::sort(hits.begin(), hits.end(), ProdNameSorter());
     for(vector<Product*>::iterator it = hits.begin(); it != hits.end(); ++it) {
@@ -128,3 +155,5 @@ void displayProducts(vector<Product*>& hits)
         resultNo++;
     }
 }
+
+
