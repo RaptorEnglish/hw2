@@ -19,6 +19,9 @@ public:
     std::set<std::string> keywords() const override;
 
     std::string displayString() const;
+
+    void dump(std::ostream& os) const;
+
 };
 
 #endif //HW2_BOOK_H

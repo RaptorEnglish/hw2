@@ -43,4 +43,9 @@ std::string Book::displayString() const {
     return name_ + "\nAuthor: " + author + " ISBN: " + isbn + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left";
 }
 
+void Book::dump(std::ostream& os) const
+{
+    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << isbn << "\n" << author << std::endl;
+}
+
 

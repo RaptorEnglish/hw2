@@ -34,3 +34,9 @@ std::set<std::string> Movie::keywords() const {
 std::string Movie::displayString() const {
     return name_ + "\nGenre: " + genre + " Rating: " + rating + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left";
 }
+
+
+void Movie::dump(std::ostream& os) const
+{
+    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre << "\n" << rating << "\n" << std::endl;
+}
