@@ -4,6 +4,7 @@
 
 #include "clothing.h"
 #include "util.h"
+#include <iomanip>
 
 Clothing::Clothing(const std::string category, const std::string name, double price, int qty, std::string size_, std::string brand_) :
         Product(category, name, price, qty),
@@ -31,10 +32,10 @@ std::set<std::string> Clothing::keywords() const {
 }
 
 std::string Clothing::displayString() const {
-    return name_ + "\nSize: " + size + " Brand: " + brand + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left";
+    return name_ + "\nSize: " + size + " Brand: " + brand + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 void Clothing::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size << "\n" << brand << std::endl;
+    os << category_ << "\n" << name_ << "\n" << std::fixed << std::setprecision(2) << price_ << "\n" << qty_ << "\n" << size << "\n" << brand << std::endl;
 }

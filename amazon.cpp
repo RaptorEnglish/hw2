@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
     std::cout << "  AND term term ...                  " << std::endl;
     std::cout << "  OR term term ...                   " << std::endl;
     std::cout << "  ADD username search_hit_number     " << std::endl;
-    std::cout << "  USERS                              " << std::endl;  // new function
+//    std::cout << "  USERS                              " << std::endl;  // new function
     std::cout << "  VIEWCART username                  " << std::endl;
     std::cout << "  BUYCART username                   " << std::endl;
     std::cout << "  QUIT new_db_filename               " << std::endl;

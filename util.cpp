@@ -16,17 +16,27 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
     std::set<std::string> keywords;
+    std::string word;
 
-    // break rawWords into substrings and break if space or punctuation encountered
-    for (size_t i = 0; i < rawWords.size(); i++) {
-        for (size_t j = i + 2; j < rawWords.size(); j++) {
-            std::string substr = rawWords.substr(i, j - i);
-            keywords.insert(convToLower(substr));
+    std::stringstream ss(rawWords);
 
-            // break if space or puncutation
-            if (rawWords[j] == ' ' || ispunct(rawWords[j])) {
-                i = j;  // skip over whitespace
-                break;
+    // load into word and repeatedly add to a clean word that stores running strings
+    while (ss >> word) {
+        std::string clean_word;
+
+        for (std::string::iterator it = word.begin(); it != word.end(); it++) {
+            if (isalnum(*it)) {
+                clean_word += *it;
+            } else {
+                if (clean_word.size() > 2) {
+                    keywords.insert(convToLower(clean_word));
+                }
+                clean_word.clear();
+            }
+
+            // add to keywords
+            if (clean_word.size() > 2) {
+                keywords.insert(clean_word);
             }
         }
     }

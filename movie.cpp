@@ -4,11 +4,12 @@
 
 #include "movie.h"
 #include "util.h"
+#include <iomanip>
 
 Movie::Movie(const std::string category, const std::string name, double price, int qty, std::string genre_, std::string rating_) :
-    Product(category, name, price, qty),
-    genre(genre_),
-    rating(rating_)
+        Product(category, name, price, qty),
+        genre(genre_),
+        rating(rating_)
 {
 
 }
@@ -32,11 +33,11 @@ std::set<std::string> Movie::keywords() const {
 }
 
 std::string Movie::displayString() const {
-    return name_ + "\nGenre: " + genre + " Rating: " + rating + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left";
+    return name_ + "\nGenre: " + genre + " Rating: " + rating + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 
 void Movie::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre << "\n" << rating << "\n" << std::endl;
+    os << category_ << "\n" << name_ << "\n" << std::fixed << std::setprecision(2) << price_ << "\n" << qty_ << "\n" << genre << "\n" << rating << std::endl;
 }

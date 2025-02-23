@@ -98,7 +98,7 @@ void MyDataStore::dump(std::ostream &ofile) {
     for (std::map<std::string, User*>::iterator it = users.begin(); it != users.end(); it++) {
         it->second->dump(ofile);
     }
-    ofile << "</users>";
+    ofile << "</users>" << std::endl;
 
 }
 
@@ -111,15 +111,15 @@ void MyDataStore::add_to_cart(std::vector<Product*> hits, std::string username, 
 
     // check that username exists
     if (users.find(username) == users.end()) {
-        std::cout << "User not found" << std::endl;
+        std::cout << "Invalid request" << std::endl;
         return;
     }
 
     // get item to add
-    Product* hit = hits[hit_result_index];
+    Product* hit = hits[hit_result_index - 1];
 
     // add hit to user cart
-    all_carts[username].push_front(hit);
+    all_carts[username].push_back(hit);
     std::cout << "Added to cart " << username << std::endl;
 
 }
@@ -134,12 +134,9 @@ void MyDataStore::view_cart(std::string username) {
     // get cart
     std::deque<Product*> cart = all_carts[username];
 
-    std::cout << "User Cart" << std::endl;
-
     // print cart
-    int i = 1;
-    for (std::deque<Product*>::iterator it = cart.begin(); it != cart.end(); it++) {
-        std::cout << "Item " << i << ":\n" << (*it)->displayString() << "\n" << std::endl;
+    for (size_t i = 0; i < cart.size(); i++) {
+        std::cout << "Item " << i << ":\n" << cart[i]->displayString() << "\n" << std::endl;
         i++;
     }
 
@@ -164,15 +161,10 @@ void MyDataStore::buy_cart(std::string username) {
     for (std::deque<Product*>::reverse_iterator it = user_cart.rbegin(); it != user_cart.rend(); it++) {
         Product* item = *it;
 
-        if (!item->getQty()) {  // if item doesn't have qty, move to next
-            std::cout << "Could not buy " << item->getName() << std::endl;
-            new_cart.push_back(item);
-        } else if (user->getBalance() >= item->getPrice()) {  // check user credits
+        if (user->getBalance() >= item->getPrice() && item->getQty() > 0) {  // check user credits
             user->deductAmount(item->getPrice());
             item->subtractQty(1);
-            std::cout << "Buying " << item->getName() << std::endl;
         } else {  // add back to cart if cant be purchased
-            std::cout << "Could not buy " << item->getName() << std::endl;
             new_cart.push_back(item);
         }
 
