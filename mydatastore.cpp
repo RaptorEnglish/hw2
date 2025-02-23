@@ -104,8 +104,8 @@ void MyDataStore::dump(std::ostream &ofile) {
 
 void MyDataStore::add_to_cart(std::vector<Product*> hits, std::string username, size_t hit_result_index) {
     // check that hit size is in bounds
-    if (hit_result_index >= hits.size() || hit_result_index < 0) {
-        std::cout << "Out of bounds" << std::endl;
+    if (hit_result_index > hits.size() || hit_result_index < 1) {
+        std::cout << "Invalid request" << std::endl;
         return;
     }
 
@@ -136,11 +136,8 @@ void MyDataStore::view_cart(std::string username) {
 
     // print cart
     for (size_t i = 0; i < cart.size(); i++) {
-        std::cout << "Item " << i << ":\n" << cart[i]->displayString() << "\n" << std::endl;
-        i++;
+        std::cout << "Item " << i + 1 << ":\n" << cart[i]->displayString() << "\n" << std::endl;
     }
-
-    std::cout << std::endl;
 
 }
 

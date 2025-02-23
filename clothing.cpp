@@ -32,7 +32,7 @@ std::set<std::string> Clothing::keywords() const {
 }
 
 std::string Clothing::displayString() const {
-    return name_ + "\nSize: " + size + " Brand: " + brand + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    return name_ + "\nSize: " + size + " Brand: " + brand + "\n" + format_price(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 void Clothing::dump(std::ostream& os) const

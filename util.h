@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <iomanip>
 
 
 /** Complete the setIntersection and setUnion functions below
@@ -43,6 +44,9 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 
     return new_set;
 }
+
+// use to format price in print string
+std::string format_price(double price);
 
 /***********************************************/
 /* Prototypes of functions defined in util.cpp */

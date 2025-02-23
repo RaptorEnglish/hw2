@@ -33,7 +33,7 @@ std::set<std::string> Movie::keywords() const {
 }
 
 std::string Movie::displayString() const {
-    return name_ + "\nGenre: " + genre + " Rating: " + rating + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    return name_ + "\nGenre: " + genre + " Rating: " + rating + "\n" + format_price(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 

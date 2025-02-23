@@ -27,22 +27,26 @@ std::set<std::string> parseStringToWords(string rawWords)
         for (std::string::iterator it = word.begin(); it != word.end(); it++) {
             if (isalnum(*it)) {
                 clean_word += *it;
+                keywords.insert(convToLower(clean_word));
             } else {
-                if (clean_word.size() > 2) {
-                    keywords.insert(convToLower(clean_word));
-                }
                 clean_word.clear();
             }
 
             // add to keywords
             if (clean_word.size() > 2) {
-                keywords.insert(clean_word);
+                keywords.insert(convToLower(clean_word));
             }
         }
     }
 
     return keywords;
 
+}
+
+std::string format_price(double price) {
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(2) << price;
+    return stream.str();
 }
 
 /**************************************************
