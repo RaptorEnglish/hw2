@@ -6,7 +6,6 @@ Menu:
   AND term term ...                  
   OR term term ...                   
   ADD username search_hit_number     
-  VIEWUSERS                          
   VIEWCART username                  
   BUYCART username                   
   QUIT new_db_filename               

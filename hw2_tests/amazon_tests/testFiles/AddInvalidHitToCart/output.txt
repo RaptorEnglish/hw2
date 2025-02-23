@@ -6,7 +6,6 @@ Menu:
   AND term term ...                  
   OR term term ...                   
   ADD username search_hit_number     
-  VIEWUSERS                          
   VIEWCART username                  
   BUYCART username                   
   QUIT new_db_filename               
@@ -16,10 +15,10 @@ Enter command:
 Hit   1
 Great Men and Women of Troy
 Author: Tommy Trojan ISBN: 978-000000000-1
-19.500000 5 left
+19.50 5 left.
 
 
 Enter command: 
-Out of bounds
+Invalid request
 
 Enter command: 

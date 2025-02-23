@@ -6,28 +6,43 @@ Menu:
   AND term term ...                  
   OR term term ...                   
   ADD username search_hit_number     
-  VIEWUSERS                          
   VIEWCART username                  
   BUYCART username                   
   QUIT new_db_filename               
 ====================================
 
 Enter command: 
-No results found!
+Hit   1
+Hidden Figures DVD
+Genre: Drama Rating: PG
+17.99 1 left.
+
 
 Enter command: 
-Out of bounds
+Added to cart rafsilva
 
 Enter command: 
-No results found!
+Hit   1
+Hidden Figures DVD
+Genre: Drama Rating: PG
+17.99 1 left.
+
 
 Enter command: 
-Out of bounds
+Added to cart redekopp
 
 Enter command: 
-Invalid username
+Item 1:
+Hidden Figures DVD
+Genre: Drama Rating: PG
+17.99 1 left.
+
 
 Enter command: 
-Invalid username
+Item 1:
+Hidden Figures DVD
+Genre: Drama Rating: PG
+17.99 1 left.
+
 
 Enter command: 
