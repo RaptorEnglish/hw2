@@ -17,23 +17,7 @@ MyDataStore::~MyDataStore() {
         delete it->second;
     }
 
-//    // delete from keywords
-//    for (std::map<std::string, std::set<Product*>>::iterator it = keyword_map.begin(); it != keyword_map.end(); it++) {
-//        for (std::set<Product*>::iterator it2 = it->second.begin(); it2 != it->second.end(); it2++) {
-//            delete *it2;
-//        }
-//    }
-//
-//    // delete from user carts
-//    for (std::map<std::string, std::deque<Product*>>::iterator it = all_carts.begin(); it != all_carts.end(); it++) {
-//        std::deque<Product*> user_cart = it->second;
-//        for (std::deque<Product*>::iterator it2 = user_cart.begin(); it2 != user_cart.end(); it2++) {
-//            delete *it2;
-//        }
-//    }
-
 }
-
 
 void MyDataStore::addProduct(Product *p) {
     products.push_back(p);
@@ -50,9 +34,10 @@ void MyDataStore::create_keyword_map() {
     keyword_map.clear();
 
     // create map from products
-    for (auto& prod : products) {
-        for (auto& keyword : prod->keywords()) {
-            keyword_map[keyword].insert(prod);
+    for (std::vector<Product*>::iterator it = products.begin(); it != products.end(); it++) {
+        std::set<std::string> keywords = (*it)->keywords();
+        for (std::set<std::string>::iterator it2 = keywords.begin(); it2 != keywords.end(); it2++) {
+            keyword_map[*it2].insert(*it);
         }
     }
 }
@@ -72,8 +57,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
     // add term matches
     int index = 0;
     for (const std::string& term : terms) {
-        auto it = keyword_map.find(term);
-        if (it != keyword_map.end()) {
+        if (keyword_map.find(term) != keyword_map.end()) {
 
             // initialize matches
             if (index == 0) {
@@ -111,7 +95,7 @@ void MyDataStore::dump(std::ostream &ofile) {
 
     // add all users to output file
     ofile << "<users>" << std::endl;
-    for (auto it = users.begin(); it != users.end(); it++) {
+    for (std::map<std::string, User*>::iterator it = users.begin(); it != users.end(); it++) {
         it->second->dump(ofile);
     }
     ofile << "</users>";
@@ -154,8 +138,8 @@ void MyDataStore::view_cart(std::string username) {
 
     // print cart
     int i = 1;
-    for (auto prod : cart) {
-        std::cout << "Item " << i << ":\n" << prod->displayString() << "\n" << std::endl;
+    for (std::deque<Product*>::iterator it = cart.begin(); it != cart.end(); it++) {
+        std::cout << "Item " << i << ":\n" << (*it)->displayString() << "\n" << std::endl;
         i++;
     }
 
@@ -177,7 +161,7 @@ void MyDataStore::buy_cart(std::string username) {
     std::deque<Product*> new_cart;
 
     // iterate backwards through user cart
-    for (auto it = user_cart.rbegin(); it != user_cart.rend(); it++) {
+    for (std::deque<Product*>::reverse_iterator it = user_cart.rbegin(); it != user_cart.rend(); it++) {
         Product* item = *it;
 
         if (!item->getQty()) {  // if item doesn't have qty, move to next
@@ -202,14 +186,14 @@ void MyDataStore::buy_cart(std::string username) {
 
 // CUSTOM FUNCTIONS
 void MyDataStore::print_products() {
-    for (const auto& x : this->products) {
-        std::cout << x->getName() << std::endl;
+    for (std::vector<Product*>::iterator it = products.begin(); it != products.end(); it++) {
+        std::cout << (*it)->getName() << std::endl;
     }
 }
 
 void MyDataStore::print_users() {
-    for (const auto& x : this->users) {
-        std::cout << x.first << std::endl;
+    for (std::map<std::string, User*>::iterator it = users.begin(); it != users.end(); it++) {
+        std::cout << (*it).first << std::endl;
     }
 }
 
